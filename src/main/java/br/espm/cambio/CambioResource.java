@@ -1,4 +1,5 @@
 package br.espm.cambio;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +18,10 @@ public class CambioResource {
 
     @Autowired
     private MoedaService moedaService;
+    
+    @Autowired
+    private CotacaoService cotacaoService;
+
 
     // @GetMapping("/hello")
     // public String helloWorld() {
@@ -28,7 +33,7 @@ public class CambioResource {
         return moedaService.listaAll();
     }
 
-    @GetMapping("/moeda/{simbolo:[A-Z]{3,}}")
+    @GetMapping("/moeda/{simbolo:[A-Z]{3}}")
     public Moeda findMoedaBySimbolo(@PathVariable String simbolo) {
         return moedaService.findBySimbolo(simbolo);
     }
@@ -40,8 +45,18 @@ public class CambioResource {
     }
 
     @PostMapping("/moeda")
-    public void save(@RequestBody Moeda moeda) {
+    public void saveMoeda(@RequestBody Moeda moeda) {
         moedaService.create(moeda);
+    }
+
+    @GetMapping("/cotacao/{simbolo}")
+    public List<Cotacao> listCotacao(@PathVariable String simbolo){
+        return cotacaoService.listAll();
+    }    
+
+    @PostMapping("/cotacao/{simbolo}/{ano}/{mes}/{dia}")
+    public void saveCotacao(@RequestBody Cotacao cotacao, @PathVariable String simbolo, @PathVariable LocalDate ano, @PathVariable LocalDate mes, @PathVariable LocalDate dia){
+
     }
     
 }
