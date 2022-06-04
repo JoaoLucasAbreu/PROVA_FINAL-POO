@@ -5,7 +5,6 @@ import java.util.UUID;
 
 public class Cotacao {
         private UUID id;
-        private String nome;
         private double valor;
         private LocalDate data;
         private UUID idMoeda;
@@ -14,18 +13,12 @@ public class Cotacao {
     
         }
     
-        public Cotacao(String nome, double valor, LocalDate data) {
-            this.nome = nome;
+        public Cotacao(double valor) {
             this.valor=valor;
-            this.data=data;
         }
     
         public UUID getId() {
             return id;
-        }
-    
-        public String getNome() {
-            return nome;
         }
 
         public LocalDate getData() {
@@ -38,10 +31,6 @@ public class Cotacao {
 
         public double getValor() {
             return valor;
-        }
-        
-        public void setNome(String nome) {
-            this.nome = nome;
         }
 
         public void setId(UUID id) {

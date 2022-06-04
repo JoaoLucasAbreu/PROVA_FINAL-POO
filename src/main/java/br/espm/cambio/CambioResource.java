@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import net.bytebuddy.asm.Advice.Local;
 
 @RestController
 public class CambioResource {
@@ -44,6 +47,12 @@ public class CambioResource {
         return moedaService.findBy(uuid);
     }
 
+    @DeleteMapping("/moeda/{id:[a-f0-9]{8}(?:-[a-f0-9]{4}){4}[a-f0-9]{8}}")
+    public void deleteMoeda(@PathVariable String id){
+        UUID uuid = UUID.fromString(id);
+        moedaService.DeleteById(uuid);
+    }
+
     @PostMapping("/moeda")
     public void saveMoeda(@RequestBody Moeda moeda) {
         moedaService.create(moeda);
@@ -51,12 +60,19 @@ public class CambioResource {
 
     @GetMapping("/cotacao/{simbolo}")
     public List<Cotacao> listCotacao(@PathVariable String simbolo){
-        return cotacaoService.listAll();
+        UUID uuid = moedaService.findBySimbolo(simbolo).getId();
+        return cotacaoService.listAll(uuid);
     }    
 
     @PostMapping("/cotacao/{simbolo}/{ano}/{mes}/{dia}")
-    public void saveCotacao(@RequestBody Cotacao cotacao, @PathVariable String simbolo, @PathVariable LocalDate ano, @PathVariable LocalDate mes, @PathVariable LocalDate dia){
-
+    public void saveCotacao(@RequestBody Cotacao cotacao, @PathVariable String simbolo, @PathVariable String ano, @PathVariable String mes, @PathVariable String dia){
+        LocalDate data = LocalDate.parse(ano + "-" + mes + "-" + dia);
+        cotacao.setData(data);
+        UUID uuid = moedaService.findBySimbolo(simbolo).getId();
+        cotacao.setIdMoeda(uuid);
+        cotacaoService.create(cotacao);
     }
+
+
     
 }

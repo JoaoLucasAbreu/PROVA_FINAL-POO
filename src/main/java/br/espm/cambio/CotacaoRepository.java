@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 public interface CotacaoRepository extends CrudRepository<CotacaoModel, String> {
     // JQL - Java Query Language
     @Query("SELECT c from CotacaoModel c WHERE UPPER(c.idMoeda) = UPPER(:idMoeda)")
-    Iterable<CotacaoModel> findAll(@Param("simbolo") String simbolo);
+    Iterable<CotacaoModel> findAll(@Param("idMoeda") String idMoeda);
+
 
 }
 

@@ -43,5 +43,9 @@ public class MoedaService {
                     .map(MoedaModel::to)
                     .orElse(null);
     }
+
+    public void DeleteById(UUID id) {
+        moedaRepository.deleteById(id.toString());
+    }
     
 }

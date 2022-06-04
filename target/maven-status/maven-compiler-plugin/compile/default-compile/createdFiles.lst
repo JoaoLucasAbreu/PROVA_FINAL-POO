@@ -1,6 +1,10 @@
 br\espm\cambio\MoedaService.class
 br\espm\cambio\CambioApplication.class
 br\espm\cambio\Moeda.class
+br\espm\cambio\Cotacao.class
 br\espm\cambio\MoedaRepository.class
+br\espm\cambio\CotacaoService.class
 br\espm\cambio\MoedaModel.class
 br\espm\cambio\CambioResource.class
+br\espm\cambio\CotacaoModel.class
+br\espm\cambio\CotacaoRepository.class
