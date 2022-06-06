@@ -19,10 +19,12 @@ public class MoedaService {
 
     public List<Moeda> listaAll() {
         return StreamSupport
-                // Transforma de iteravel para lista
+
+                // Vai transformar de iteravel para lista
                 .stream(moedaRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList())
-                // Transforma de Model para Objeto
+
+                // Vai transformar de Model para Objeto
                 .stream().map(MoedaModel::to)
                 .collect(Collectors.toList());
     }

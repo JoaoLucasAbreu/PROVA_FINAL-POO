@@ -19,10 +19,12 @@ public class CotacaoService {
 
     public List<Cotacao> listAll(UUID id) {
         return StreamSupport
-                // Transforma de iteravel para lista
+
+                // Vai transformar de iteravel para lista
                 .stream(cotacaoRepository.findAll(id.toString()).spliterator(), false)
                 .collect(Collectors.toList())
-                // Transforma de Model para Objeto
+
+                // Vai transformar de Model para Objeto
                 .stream().map(CotacaoModel::to)
                 .collect(Collectors.toList());
     }

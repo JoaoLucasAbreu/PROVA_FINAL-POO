@@ -3,6 +3,7 @@ package br.espm.cambio;
 import java.util.UUID;
 
 public class Moeda {
+    
     private UUID id;
     private String nome;
     private String simbolo;
