@@ -11,7 +11,7 @@ create table espm.cotacao (
     id_moeda varchar(64)null,
     dt_cotacao date not null,
     vr_valor decimal(14,2) not null,
-    primary key pk_cotacao (id_cotacao),
-    foreign key (id_moeda) references moeda(id_moeda)
+    primary key pk_cotacao (id_cotacao)
+    
     )
 ;
